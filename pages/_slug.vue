@@ -1,31 +1,34 @@
 <template>
   <section class="container">
-    <div>
-      <h1>Latest Posts from Contentful</h1>
-        <h2 v-for="(post, index) in posts" :key="index">
-          <nuxt-link :to="post.fields.slug">{{post.fields.title}}</nuxt-link>
-        </h2>
-    </div>
-  </section>
+		<div>
+			<h1>{{post.fields.title}}</h1>
+			<p>
+				{{post.fields.content}}
+			</p>
+		</div>
+	</section>
 </template>
 
 <script>
 import client from '~/plugins/contentful'
 
 export default {
-  asyncData() {
+  asyncData({params}) {
     return client.getEntries({
-      content_type: 'post'
+			content_type: 'post',
+			'fields.slug': params.slug
     }).then(entries => {
       return {
-        posts: entries.items
+        post: entries.items[0]
       }
     }).catch(e => {
       console.log(e)
     })
   },
-  head: {
-    title: 'Latest Contentful Posts'
+  head() {
+    return {
+			title: this.post.fields.title
+		}
   }
 }
 </script>

@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 module.exports = {
   /*
   ** Headers of the page
@@ -40,6 +42,8 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  plugins: ['~/plugins/contentful'],
+  modules: ['@nuxtjs/dotenv']
 }
 
