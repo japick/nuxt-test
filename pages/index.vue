@@ -1,12 +1,14 @@
 <template>
-  <section class="container">
-    <div>
-      <h1>Latest Posts from Contentful</h1>
-        <h2 v-for="(post, index) in posts" :key="index">
-          <nuxt-link :to="post.fields.slug">{{post.fields.title}}</nuxt-link>
-        </h2>
-    </div>
-  </section>
+  <div>
+    <section class="container">
+      <div>
+        <h1>Latest Posts from Contentful</h1>
+          <h2 v-for="(post, index) in posts" :key="index">
+            <nuxt-link :to="'/post/' + post.fields.slug">{{post.fields.title}}</nuxt-link>
+          </h2>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
