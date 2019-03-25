@@ -15,7 +15,7 @@
 import client from '~/plugins/contentful'
 
 export default {
-  asyncData() {
+  asyncData({error}) {
     return client.getEntries({
       content_type: 'post'
     }).then(entries => {
@@ -23,6 +23,7 @@ export default {
         posts: entries.items
       }
     }).catch(e => {
+      error({ statusCode: 404, message: 'Post not found' })
       console.log(e)
     })
   },
